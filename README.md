@@ -1,7 +1,7 @@
 # Ayeene
 ## Reflected and DOM-based XSS vulnerability scanner
 
-### This tool tests the following cases and warns you if there is a possibility that the input is vulnerable.
+### This tool tests the following cases and warns you if there is a possibility that the URL is vulnerable.
 
 ```
 https://target.com/1.php?param1=value1<
