@@ -12,7 +12,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 
 # Configure logging
-logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.WARNING, format='[%(levelname)s] %(message)s')
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Reflected and DOM-based XSS vulnerability scanner')
