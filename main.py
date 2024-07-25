@@ -17,8 +17,8 @@ logging.basicConfig(level=logging.WARNING, format='%(asctime)s - %(levelname)s -
 def parse_args():
     parser = argparse.ArgumentParser(description='Reflected and DOM-based XSS vulnerability scanner')
     parser.add_argument('input', metavar='INPUT', type=str, help='Single URL or path to a file containing a list of URLs')
-    parser.add_argument('--browser', type=str, choices=['chrome', 'firefox'], default='chrome', help='Browser to use for scanning (default: chrome)')
-    parser.add_argument('--compare', action='store_true', help='Compare page source fetched with requests and Selenium')
+    parser.add_argument('-b', '--browser', type=str, choices=['chrome', 'firefox'], default='chrome', help='Browser to use for scanning (default: chrome)')
+    parser.add_argument('-c', '--compare', action='store_true', help='Compare page source fetched with requests and Selenium')
     return parser.parse_args()
 
 def read_urls(input_path):
